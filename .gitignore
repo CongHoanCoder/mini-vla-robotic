@@ -4,3 +4,6 @@ MUJOCO_LOG.txt
 LIBERO/
 videos*/
 checkpoints/
+# local tooling / secrets
+opencode.json
+.vscode/
