@@ -89,6 +89,9 @@ def parse_args():
     parser.add_argument("--diffusion-T", type=int, default=16)
     parser.add_argument("--obs-history-len", type=int, default=1)
     parser.add_argument("--action-head-hidden-dim", type=int, default=256)
+    parser.add_argument("--fusion-type", type=str, default="mlp",
+                        choices=["mlp", "transformer"],
+                        help="Cross-modal fusion: 'mlp' or 'transformer'")
     parser.add_argument("--save-path", type=str,
                         default="checkpoints/model.pt")
     parser.add_argument("--device", type=str, default="cuda",
@@ -103,7 +106,7 @@ def parse_args():
                     help="If set, HF backbone is trainable")
     parser.add_argument("--vision-image-size", type=int, default=None,
                     help="Override vision encoder image size (e.g. 224)")
-    parser.add_argument("--use-flow-matching", action="store_true", default=False,
+    parser.add_argument("--use-flow-matching", action="store_true", default=True,
                     help="If set, use flow-matching instead of diffusion")
     return parser.parse_args()
 
@@ -139,6 +142,7 @@ def main():
         use_flow_matching=args.use_flow_matching, # flow-matching / diffusion
         obs_history_len=args.obs_history_len,
         action_head_hidden_dim=args.action_head_hidden_dim,
+        fusion_type=args.fusion_type,
     ).to(device)
 
     loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=True)
@@ -176,6 +180,7 @@ def main():
             "use_flow_matching": args.use_flow_matching,
             "obs_history_len": args.obs_history_len,
             "action_head_hidden_dim": args.action_head_hidden_dim,
+            "fusion_type": args.fusion_type,
             "action_stats": {
                 "mean": dataset.action_mean,
                 "std": dataset.action_std,

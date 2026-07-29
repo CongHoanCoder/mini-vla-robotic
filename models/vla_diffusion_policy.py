@@ -3,7 +3,7 @@
 import torch
 import torch.nn as nn
 from .encoders import TextEncoderTinyGRU, StateEncoderMLP
-from .fusion import FusionMLP
+from .fusion import FusionMLP, FusionTransformer
 
 # action heads
 from .diffusion_head import DiffusionConfig, DiffusionPolicyHead
@@ -25,6 +25,7 @@ class VLADiffusionPolicy(nn.Module):
         use_flow_matching=False,
         obs_history_len=1,
         action_head_hidden_dim=256,
+        fusion_type="mlp",
     ):
         super().__init__()
 
@@ -44,7 +45,13 @@ class VLADiffusionPolicy(nn.Module):
 
         self.txt_encoder = TextEncoderTinyGRU(vocab_size=vocab_size, d_word=64, d_model=d_model)
         self.state_encoder = StateEncoderMLP(state_dim=state_dim * obs_history_len, d_model=d_model)
-        self.fusion = FusionMLP(d_model=d_model)
+        self.fusion_type = fusion_type
+        if fusion_type == "transformer":
+            self.fusion = FusionTransformer(d_model=d_model)
+        elif fusion_type == "mlp":
+            self.fusion = FusionMLP(d_model=d_model)
+        else:
+            raise ValueError(f"Unsupported fusion_type={fusion_type!r}; use 'mlp' or 'transformer'")
 
         # decide which action-head to use
         self.use_flow_matching = use_flow_matching

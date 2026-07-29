@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--episodes", type=int, default=50)
     parser.add_argument("--max-steps", type=int, default=150)
-    parser.add_argument("--output-path", type=str, default="data/metaworld_bc.npz")
+    parser.add_argument("--output-path", type=str, default="data/push-v3.npz")
     parser.add_argument("--sleep", type=float, default=0.0,
                         help="Optional sleep between steps for visualization (seconds)")
     parser.add_argument("--instruction", type=str, default="push the object to the goal",

@@ -65,7 +65,7 @@ def parse_args():
     parser.add_argument(
         "--policy-camera-name",
         type=str,
-        default="topview",
+        default="corner",
         help="Camera used for policy observations at inference time",
     )
     parser.add_argument(
