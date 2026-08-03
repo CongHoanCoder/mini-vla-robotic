@@ -63,7 +63,7 @@ python -m scripts.collect_data \
   --camera-name corner \
   --episodes 100 \
   --max-steps 100 \
-  --output-path data/metaworld_push_bc.npz
+  --output-path data/push_v3.npz
 ```
 
 ## Train your VLA model
