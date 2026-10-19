@@ -31,6 +31,12 @@ The mini-VLA model core is mainly four files: [models/encoders.py](models/encode
 Additionally, I provide scripts such as [scripts/collect_data.py](scripts/collect_data.py) to collect data using an expert policy, [scripts/train.py](scripts/train.py) to train the VLA on the collected data, and [scripts/test.py](scripts/test.py) to test VLA-Diffusion Policy's performance (+ save videos).
 
 
+# Video
+
+[Building a Robot's Brain](https://github.com/user-attachments/assets/71f12e39-cefb-4bd5-8da0-ff588e21c709)
+
+I love how NotebookLM helps to create such a detailed tutorial.
+
 ## Getting started
 
 Create (or activate) a conda environment
@@ -101,13 +107,3 @@ Planning to,
 - support for multiple tasks (MT10 or M50 something, let's see how much I can scale it)
 - adding larger vision/text backbones (CLIP, SigLIP, ViT) -- w/o losing simplicity
 - arbitrary text-input during inference
-
-## 🙌 Contributing
-
-PRs, improvements, and experiments are welcome! Try adding support for,
-
-- MLP-only vision encoder
-- Online evaluation metrics
-- MT10 / MT50 multi-task training
-
-much more! Checkout [mini-vla/issues](https://github.com/keivalya/mini-vla/issues).
